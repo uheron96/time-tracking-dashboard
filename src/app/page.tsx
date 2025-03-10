@@ -1,95 +1,124 @@
+"use client";
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./styles/page.module.css";
+import reportCardStyle from "./styles/reportCard.module.css";
+import { TimeCard, TimeCardProps, TimeCardType } from "./timeCard";
+import timeData from "./data.json";
+import { useState } from "react";
 
 export default function Home() {
+  const sortedData = timeData.sort((a, b) => a.title.localeCompare(b.title));
+  const dailyData = sortedData.map(({ title, timeframes }) => ({
+    title,
+    ...timeframes.daily,
+  }));
+  const weeklyData = sortedData.map(({ title, timeframes }) => ({
+    title,
+    ...timeframes.weekly,
+  }));
+  const monthlyData = sortedData.map(({ title, timeframes }) => ({
+    title,
+    ...timeframes.monthly,
+  }));
+
+  const [activeTab, setActiveTab] = useState<TimeCardProps["type"]>(
+    TimeCardType.day
+  );
+
+  const getTabsContent = (type: TimeCardType) => {
+    switch (type) {
+      case TimeCardType.day:
+        return dailyData.map((data) => {
+          return (
+            <TimeCard
+              key={data.title}
+              type={TimeCardType.day}
+              title={data.title}
+              hours={data.current}
+              prevValue={data.previous}
+              headerColor="#FF8B37"
+            />
+          );
+        });
+      case TimeCardType.week:
+        return weeklyData.map((data) => {
+          return (
+            <TimeCard
+              key={data.title}
+              type={TimeCardType.week}
+              title={data.title}
+              hours={data.current}
+              prevValue={data.previous}
+              headerColor="#FF8B37"
+            />
+          );
+        });
+      case TimeCardType.month:
+        return monthlyData.map((data) => {
+          return (
+            <TimeCard
+              key={data.title}
+              type={TimeCardType.month}
+              title={data.title}
+              hours={data.current}
+              prevValue={data.previous}
+              headerColor="#FF8B37"
+            />
+          );
+        });
+    }
+  };
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <div className={reportCardStyle.reportCard}>
+        <div className={reportCardStyle.reportCardHeader}>
+          <Image
+            className={reportCardStyle.avatar}
+            width={100}
+            height={100}
+            src="/images/image-jeremy.png"
+            alt="Profile Image"
+          />
+          <div className={reportCardStyle.reportCardHeaderInner}>
+            <h2 className={reportCardStyle.nameDescriptionText}>Report for</h2>
+            <h1 className={reportCardStyle.nameText}>Jeremy Robson</h1>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className={reportCardStyle.reportCardBottom}>
+          <h3
+            className={`${reportCardStyle.timePeriodText} ${
+              activeTab === TimeCardType.day && reportCardStyle.tabSelected
+            }`}
+            onClick={() => setActiveTab(TimeCardType.day)}
+          >
+            Daily
+          </h3>
+          <h3
+            className={`${reportCardStyle.timePeriodText} ${
+              activeTab === TimeCardType.week && reportCardStyle.tabSelected
+            }`}
+            onClick={() => setActiveTab(TimeCardType.week)}
+          >
+            Weekly
+          </h3>
+          <h3
+            className={`${reportCardStyle.timePeriodText} ${
+              activeTab === TimeCardType.month && reportCardStyle.tabSelected
+            }`}
+            onClick={() => setActiveTab(TimeCardType.month)}
+          >
+            Monthly
+          </h3>
+        </div>
+      </div>
+      <div className={reportCardStyle.card}></div>
+
+      <div className={styles.timeCardsContainer}>
+        {getTabsContent(activeTab)}
+      </div>
     </div>
   );
 }

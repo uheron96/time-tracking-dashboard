@@ -1,0 +1,10 @@
+.page {
+  padding: 4em 2em;
+}
+
+.timeCardsContainer {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
