@@ -69,54 +69,56 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <div
-        className={`${reportCardStyle.reportCard} ${styles.reportCard}`}
-      >
-        <div className={reportCardStyle.reportCardHeader}>
-          <Image
-            className={reportCardStyle.avatar}
-            width={100}
-            height={100}
-            src="/images/image-jeremy.png"
-            alt="Profile Image"
-          />
-          <div className={reportCardStyle.reportCardHeaderInner}>
-            <h2 className={reportCardStyle.nameDescriptionText}>Report for</h2>
-            <h1 className={reportCardStyle.nameText}>Jeremy Robson</h1>
+      <div className={styles.main}>
+        <div className={`${reportCardStyle.reportCard} ${styles.reportCard}`}>
+          <div className={reportCardStyle.reportCardHeader}>
+            <Image
+              className={reportCardStyle.avatar}
+              width={100}
+              height={100}
+              src="/images/image-jeremy.png"
+              alt="Profile Image"
+            />
+            <div className={reportCardStyle.reportCardHeaderInner}>
+              <h2 className={reportCardStyle.nameDescriptionText}>
+                Report for
+              </h2>
+              <h1 className={reportCardStyle.nameText}>Jeremy Robson</h1>
+            </div>
+          </div>
+
+          <div className={reportCardStyle.reportCardBottom}>
+            <h3
+              className={`${reportCardStyle.timePeriodText} ${
+                activeTab === TimeCardType.day && reportCardStyle.tabSelected
+              }`}
+              onClick={() => setActiveTab(TimeCardType.day)}
+            >
+              Daily
+            </h3>
+            <h3
+              className={`${reportCardStyle.timePeriodText} ${
+                activeTab === TimeCardType.week && reportCardStyle.tabSelected
+              }`}
+              onClick={() => setActiveTab(TimeCardType.week)}
+            >
+              Weekly
+            </h3>
+            <h3
+              className={`${reportCardStyle.timePeriodText} ${
+                activeTab === TimeCardType.month && reportCardStyle.tabSelected
+              }`}
+              onClick={() => setActiveTab(TimeCardType.month)}
+            >
+              Monthly
+            </h3>
           </div>
         </div>
+        <div className={reportCardStyle.card}></div>
 
-        <div className={reportCardStyle.reportCardBottom}>
-          <h3
-            className={`${reportCardStyle.timePeriodText} ${
-              activeTab === TimeCardType.day && reportCardStyle.tabSelected
-            }`}
-            onClick={() => setActiveTab(TimeCardType.day)}
-          >
-            Daily
-          </h3>
-          <h3
-            className={`${reportCardStyle.timePeriodText} ${
-              activeTab === TimeCardType.week && reportCardStyle.tabSelected
-            }`}
-            onClick={() => setActiveTab(TimeCardType.week)}
-          >
-            Weekly
-          </h3>
-          <h3
-            className={`${reportCardStyle.timePeriodText} ${
-              activeTab === TimeCardType.month && reportCardStyle.tabSelected
-            }`}
-            onClick={() => setActiveTab(TimeCardType.month)}
-          >
-            Monthly
-          </h3>
+        <div className={styles.timeCardsContainer}>
+          {getTabsContent(activeTab)}
         </div>
-      </div>
-      <div className={reportCardStyle.card}></div>
-
-      <div className={styles.timeCardsContainer}>
-        {getTabsContent(activeTab)}
       </div>
     </div>
   );
