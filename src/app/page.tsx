@@ -37,7 +37,6 @@ export default function Home() {
               title={data.title}
               hours={data.current}
               prevValue={data.previous}
-              headerColor="#FF8B37"
             />
           );
         });
@@ -50,7 +49,6 @@ export default function Home() {
               title={data.title}
               hours={data.current}
               prevValue={data.previous}
-              headerColor="#FF8B37"
             />
           );
         });
@@ -63,7 +61,6 @@ export default function Home() {
               title={data.title}
               hours={data.current}
               prevValue={data.previous}
-              headerColor="#FF8B37"
             />
           );
         });
@@ -72,7 +69,9 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <div className={reportCardStyle.reportCard}>
+      <div
+        className={`${reportCardStyle.reportCard} ${styles.reportCard}`}
+      >
         <div className={reportCardStyle.reportCardHeader}>
           <Image
             className={reportCardStyle.avatar}

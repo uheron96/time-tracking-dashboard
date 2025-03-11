@@ -8,3 +8,28 @@
   flex-direction: column;
   gap: 2em;
 }
+
+@media screen and (min-width: 48em) {
+  .page,
+  html {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .reportCard {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    margin-right: 2em;
+    margin-top: 1.8em;
+  }
+
+  .timeCardsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 2rem;
+  }
+}

@@ -1,3 +1,72 @@
 .timeCard {
   background-color: var(--dark-blue);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 2em;
+  border-radius: 16px;
+  position: relative;
+  z-index: 2;
+  background-color: var(--dark-blue);
+  margin-top: -1em;
+}
+
+.headerText {
+  color: var(--white);
+  font-size: clamp(1rem, 4vw, 1.1rem);
+  font-weight: var(--bold);
+}
+
+.lastPeriodText {
+  color: var(--pale-blue);
+  font-size: clamp(1rem, 1vw, 1.1rem);
+  font-weight: var(--semi-bold);
+}
+
+.row,
+.bottomContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hoursText {
+  color: var(--white);
+  font-size: clamp(1rem, 6vw, 2rem);
+  font-weight: var(--regular);
+}
+
+.colorHeader {
+  height: 4em;
+  background-color: var(--header-color, var(--default-gray));
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.headerImage {
+  width: 35%;
+  height: auto;
+  position: absolute;
+  right: 1em;
+}
+
+.inner:hover {
+  background-color: var(--blue);
+}
+
+@media screen and (min-width: 48em) {
+  .bottomContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
 }

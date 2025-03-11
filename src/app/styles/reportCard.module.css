@@ -1,21 +1,22 @@
 .nameText {
   font-weight: var(--bold);
-  font-size: clamp(1.5em, 2.5vw, 2.5em);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
 }
 
 .nameDescriptionText {
   font-weight: var(--regular);
-  font-size: clamp(1em, 1vw, 2em);
+  font-size: clamp(1rem, 1vw, 2rem);
 }
 
 .timePeriodText {
   color: var(--desaturated-blue);
   font-weight: var(--semi-bold);
-  font-size: clamp(1.2em, 1.5vw, 2.3em);
+  font-size: clamp(1.2rem, 1vw, 2rem);
   cursor: pointer;
 }
 
-.tabSelected {
+.tabSelected,
+.timePeriodText:hover {
   color: var(--white);
 }
 
@@ -54,4 +55,26 @@
   justify-content: space-between;
   gap: 1em;
   padding: 2em;
+}
+
+@media screen and (min-width: 48em) {
+  .reportCard {
+    display: flex;
+    flex-direction: column;
+    width: 15em;
+  }
+
+  .reportCardHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reportCardBottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: auto;
+  }
 }
